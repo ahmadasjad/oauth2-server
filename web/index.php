@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use app\controllers\Client;
-use app\controllers\Dashboard;
-use app\controllers\User;
+use App\Application\Controllers\Client;
+use App\Application\Controllers\Dashboard;
+use App\Application\Controllers\User;
 use Cycle\Annotated;
 use Cycle\ORM\Factory;
 use Cycle\ORM\ORM;

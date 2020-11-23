@@ -75,7 +75,6 @@ return function (ContainerBuilder $containerBuilder) {
             $orm = new ORM(new Factory($dbal));
             $orm = $orm->withSchema(new ORMSchema($schema));
             return $orm;
-            $container->set('orm', $orm);
         },
     ]);
 };

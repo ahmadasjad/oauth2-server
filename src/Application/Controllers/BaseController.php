@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\controllers;
+namespace App\Application\Controllers;
 
 
 use Psr\Container\ContainerInterface;

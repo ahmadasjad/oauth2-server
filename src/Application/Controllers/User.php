@@ -1,16 +1,13 @@
 <?php
 
-namespace app\controllers;
+namespace App\Application\Controllers;
 
+use App\Application\Controllers\BaseController;
 use app\models\User as ModelsUser;
-use Cycle\ORM\Factory;
-use Cycle\ORM\ORM;
-use Cycle\ORM\Transaction;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
-use Throwable;
 
 class User extends BaseController
 {
