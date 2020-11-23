@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Views\Twig;
 
 abstract class Action
 {
@@ -124,5 +125,21 @@ abstract class Action
         return $this->response
                     ->withHeader('Content-Type', 'application/json')
                     ->withStatus($payload->getStatusCode());
+    }
+
+    /**
+     * @param string $template
+     * @param array $data
+     * @return Response
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    protected function render(string $template,array $data=[])
+    {
+        $view = Twig::fromRequest($this->request);
+        return $view->render($this->response, $template, [
+            'users' => $data,
+        ]);
     }
 }

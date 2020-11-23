@@ -16,8 +16,6 @@ class LoginAction extends Action
      */
     protected function action(): Response
     {
-        $view = Twig::fromRequest($this->request);
-        return $view->render($this->response, 'user/login.twig', [
-        ]);
+        return $this->render('user/login.twig');
     }
 }

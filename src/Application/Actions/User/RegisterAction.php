@@ -13,8 +13,6 @@ class RegisterAction extends Action
 
     protected function action(): Response
     {
-        $view = Twig::fromRequest($this->request);
-        return $view->render($this->response, 'user/register.twig', [
-        ]);
+        return $this->render('user/register.twig');
     }
 }
