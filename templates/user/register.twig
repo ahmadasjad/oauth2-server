@@ -1,0 +1,56 @@
+
+
+{% extends "layout.html" %}
+
+{% block content %}
+<form class="form-horizontal" action='' method="POST">
+    <div class="card">
+      <div class="card-header">
+        <legend class="">Register</legend>
+      </div>
+      <div class="card-body">
+        <div class="mb3">
+        <!-- Username -->
+        <label  for="username">Name</label>
+        <!-- <div class="controls"> -->
+          <input type="text" name="name" placeholder="" class="form-control">
+          <p class="help-block">Name can contain any letters or numbers, without spaces</p>
+        <!-- </div> -->
+      </div>
+   
+      <div class="mb3">
+        <!-- E-mail -->
+        <label for="email">E-mail</label>
+        <!-- <div class="controls"> -->
+          <input type="text" name="email" placeholder="" class="form-control">
+          <p class="help-block">Please provide your E-mail</p>
+        <!-- </div> -->
+      </div>
+   
+      <div class="mb3">
+        <!-- Password-->
+        <label for="password">Password</label>
+        <!-- <div class="controls"> -->
+          <input type="password" name="password" placeholder="" class="form-control">
+          <p class="help-block">Password should be at least 4 characters</p>
+        <!-- </div> -->
+      </div>
+   
+      <div class="mb3">
+        <!-- Password -->
+        <label  for="password_confirm">Password (Confirm)</label>
+        <!-- <div class="controls"> -->
+          <input type="password" name="password_confirm" placeholder="" class="form-control">
+          <p class="help-block">Please confirm password</p>
+        <!-- </div> -->
+      </div>
+    </div>
+      <div class="card-footer">
+        <!-- Button -->
+        <!-- <div class="controls"> -->
+          <button class="btn btn-success">Register</button>
+        <!-- </div> -->
+      </div>
+    </div>
+  </form>
+  {% endblock content %}

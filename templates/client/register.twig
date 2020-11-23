@@ -1,0 +1,33 @@
+
+
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="post" action="register.php">
+ <div class="card">
+  <div class="card-header"><div class="card-title">Register</div></div>
+  <div class="card-body">
+  <div class="mb-3">
+   <label for="requester_name">Name</label>
+   <input type="text" id="requester_name" name="requester_name" class="form-control">
+  </div>
+  <div class="mb-3">
+   <label for="requester_email">Email</label>
+   <input type="text" id="requester_email" name="requester_email" class="form-control">
+  </div>
+  <div class="mb-3">
+   <label for="application_uri">URI</label>
+   <input type="text" id="application_uri" name="application_uri" class="form-control">
+  </div>
+  <div class="mb-3">
+   <label for="callback_uri">Callback URI</label>
+   <input type="text" id="callback_uri" name="callback_uri" class="form-control">
+  </div>
+</div>
+  <div class="card-footer">
+    <input type="submit" value="Register" class="btn btn-primary">
+  </div>
+</div>
+ 
+</form>
+{% endblock content %}
