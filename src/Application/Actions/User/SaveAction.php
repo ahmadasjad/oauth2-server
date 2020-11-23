@@ -4,14 +4,13 @@
 namespace App\Application\Actions\User;
 
 
-use App\Domain\DomainException\DomainRecordNotFoundException;
+use App\Application\Actions\Action;
 use app\models\User as ModelsUser;
 use Cycle\ORM\Transaction;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Exception\HttpBadRequestException;
 use Throwable;
 
-class SaveAction extends \App\Application\Actions\Action
+class SaveAction extends Action
 {
 
     /**

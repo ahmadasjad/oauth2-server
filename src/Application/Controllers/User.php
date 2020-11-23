@@ -24,12 +24,8 @@ class User extends BaseController
         $orm = $this->container->get('orm');
         $r = $orm->getRepository(ModelsUser::class);
         $data = $r->findAll();
-//        echo '<pre>';
-//        var_dump($data);
-//        echo '</pre>';
         $view = Twig::fromRequest($request);
         return $view->render($response, 'user/list.twig', [
-            // 'name' => $args['name'],
             'users' => $data,
         ]);
     }
