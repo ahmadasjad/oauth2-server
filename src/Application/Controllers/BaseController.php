@@ -10,9 +10,13 @@ use Psr\Http\Message\ServerRequestInterface;
 
 abstract class BaseController
 {
+    /**
+     * @var ContainerInterface
+     */
     protected ContainerInterface $container;
     protected ServerRequestInterface $request;
     protected ResponseInterface $response;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

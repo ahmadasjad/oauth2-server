@@ -66,6 +66,8 @@ $twig = Twig::create(ROOT_DIR. '/templates',
         // 'cache' => dirname(__DIR__). '/cache',
         'cache' => !DEBUG,
     ]);
+$twig->addExtension($container->get(\app\lib\twig\extension\FlashMessage::class));
+//$twig->getLoader()->
 
 // Add Middlewares
 $app->add(TwigMiddleware::create($app, $twig));
@@ -81,6 +83,7 @@ $app->get('/user/login', \App\Application\Actions\User\LoginAction::class);
 $app->post('/user/login', [User::class , 'authenticate']);
 $app->get('/user/authorize', [User::class , 'authorize']);
 $app->get('/user/list', [User::class , 'list']);
-$app->get('/client/register', [Client::class , 'register']);
+$app->get('/client/register', [Client::class , 'viewForm']);
+$app->post('/client/register', [Client::class , 'register']);
 
 $app->run();

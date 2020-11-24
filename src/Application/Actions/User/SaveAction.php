@@ -19,14 +19,12 @@ class SaveAction extends Action
     protected function action(): Response
     {
         $data = $this->request->getParsedBody();
-        $user = new ModelsUser();
+        $user = new ModelsUser($this->container);
         $user->setName($data['name']);
         $user->email = $data['email'];
 
-        $tr = new Transaction($this->container->get('orm'));
-        $tr->persist($user);
         try {
-            $tr->run();
+            $user->save();
             $this->response->getBody()->write('User Registered Successfully!');
         } catch (Throwable $e) {
             $data = "<pre>".print_r($e, true)."</pre>";

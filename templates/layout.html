@@ -40,6 +40,11 @@
         </div>
       </nav>
       <hr/>
+      {% for key, value in flashes() %}
+        {% for item in value %}
+          <div class="alert alert-{{key}}">{{item}}</div>
+        {% endfor %}
+      {% endfor %}
       {% block content %}{% endblock %}
     </div>
     

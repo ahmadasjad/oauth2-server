@@ -77,4 +77,12 @@ return function (ContainerBuilder $containerBuilder) {
             return $orm;
         },
     ]);
+    $containerBuilder->addDefinitions([
+        'flash' => function(ContainerInterface $c){
+            if(!session_id()){
+                session_start();
+            }
+            return new \Slim\Flash\Messages();
+        }
+    ]);
 };

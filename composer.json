@@ -21,7 +21,8 @@
         "cycle/schema-builder": "^1.1",
         "ext-json": "*",
         "monolog/monolog": "^2.1",
-        "vlucas/phpdotenv": "^5.2"
+        "vlucas/phpdotenv": "^5.2",
+        "slim/flash": "^0.4.0"
     },
     "autoload": {
         "psr-4": {
