@@ -4,31 +4,28 @@ declare(strict_types=1);
 use App\Application\Controllers\Client;
 use App\Application\Controllers\Dashboard;
 use App\Application\Controllers\User;
-use Cycle\Annotated;
-use Cycle\ORM\Factory;
-use Cycle\ORM\ORM;
-use Cycle\ORM\Schema as ORMSchema;
-use Cycle\Schema;
 use DI\Container;
 use DI\ContainerBuilder;
+use League\OAuth2\Server\ResourceServer;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Routing\RouteCollectorProxy;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
-use Spiral\Database\Config\DatabaseConfig;
-use Spiral\Database\DatabaseManager;
-use Spiral\Tokenizer;
 
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
 
-//Initia constants
+//Initial constants
 define('ROOT_DIR', dirname(__DIR__));
 define('DEBUG', true);
 
-require_once(ROOT_DIR.'/vendor/autoload.php');
+if (DEBUG) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
+}
+
+require_once(ROOT_DIR . '/vendor/autoload.php');
 
 //Load environment variables
 $dotenv = Dotenv\Dotenv::createImmutable(ROOT_DIR);
@@ -60,7 +57,7 @@ $container->set(Request::class, $request);
 $app = \DI\Bridge\Slim\Bridge::create($container);
 
 // Create Twig
-$twig = Twig::create(ROOT_DIR. '/templates',
+$twig = Twig::create(ROOT_DIR . '/templates',
     [
         'debug' => DEBUG,
         // 'cache' => dirname(__DIR__). '/cache',
@@ -80,10 +77,18 @@ $app->get('/', [Dashboard::class, 'index']);
 $app->get('/user/register', \App\Application\Actions\User\RegisterAction::class);
 $app->post('/user/register', \App\Application\Actions\User\SaveAction::class);
 $app->get('/user/login', \App\Application\Actions\User\LoginAction::class);
-$app->post('/user/login', [User::class , 'authenticate']);
-$app->get('/user/authorize', [User::class , 'authorize']);
-$app->get('/user/list', [User::class , 'list']);
-$app->get('/client/register', [Client::class , 'viewForm']);
-$app->post('/client/register', [Client::class , 'register']);
+$app->post('/user/login', [User::class, 'authenticate']);
+$app->get('/user/authorize', [User::class, 'authorize']);
+$app->get('/user/list', [User::class, 'list']);
+$app->get('/client/register', [Client::class, 'viewForm']);
+$app->post('/client/register', [Client::class, 'register']);
+
+$app->group('/protected', function (RouteCollectorProxy $group) {
+    $group->get('/test', function (Request $request, Response $response, array $args) {
+        $response->getBody()->write('Your are accessing content restricted with oauth2');
+
+        return $response;
+    });
+})->add(new \App\OAuth2\ResourceServerMiddleware($app->getContainer()->get(ResourceServer::class)));
 
 $app->run();
